@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: boot
+  http:
+    encoding:
+      force: true
+      force-response: true
+    converters:
+      preferred-json-mapper: jackson
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    username: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: mysql#root
+    url: jdbc:mysql://:3306/mydb?characterEncoding=UTF8&serverTimezone=GMT&useUnicode=true&autoReconnect=true&useSSL=false
+    name: Hikari
+  aop:
+    proxy-target-class: true
+    auto: true
+server:
+  http2:
+    enabled: true
+  port: 7070
+  undertow:
+    accesslog:
+      enabled: true
+debug: true
+mybatis:
+  check-config-location: true
+  type-aliases-package: com.api.boot.modules.domain
+  mapper-locations: classpath:/com/api/boot/modules/mapper/*.xml
+  configuration:
+    aggressive-lazy-loading: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+logging:
+  level: debug

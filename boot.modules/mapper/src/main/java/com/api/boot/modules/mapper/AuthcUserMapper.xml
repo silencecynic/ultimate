@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.boot.modules.repository.AuthcUserMapper">
+  <resultMap id="BaseResultMap" type="com.api.boot.modules.domain.AuthcUser">
+    <constructor>
+      <arg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="lock" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="salt" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.api.boot.modules.domain.AuthcUser">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into authc_user (id, user_name,
+      password, lock, create_time, 
+      salt)
+    values ( #{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{lock,jdbcType=CHAR}, #{createTime,jdbcType=DATE}, 
+      #{salt,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.api.boot.modules.domain.AuthcUser">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into authc_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        id
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="lock != null">
+        lock,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sort != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lock != null">
+        #{lock,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

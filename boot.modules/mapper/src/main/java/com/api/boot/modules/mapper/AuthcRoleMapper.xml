@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.boot.modules.repository.AuthcRoleMapper">
+  <resultMap id="BaseResultMap" type="com.api.boot.modules.domain.AuthcRole">
+    <constructor>
+      <arg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="lock" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="DATE" />
+    </constructor>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.api.boot.modules.domain.AuthcRole">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into authc_role (
+      id,
+      role,
+     `lock`,
+      create_time
+    ) values (
+       #{id,jdbcType=VARCHAR},
+       #{role,jdbcType=VARCHAR},
+       #{lock,jdbcType=CHAR},
+       #{createTime,jdbcType=DATE}
+     )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.api.boot.modules.domain.AuthcRole">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into authc_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        id,
+      <if test="role != null">
+        role,
+      </if>
+      <if test="lock != null">
+        `lock`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        #{id,jdbcType=VARCHAR},
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="lock != null">
+        #{lock,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
