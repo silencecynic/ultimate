@@ -9,5 +9,4 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
         return DataSourceHolder.getRoutingData();
     }
 
-
 }
