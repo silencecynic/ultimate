@@ -50,13 +50,13 @@ public class MessagesResolve implements ApplicationContextAware, DisposableBean 
         return applicationContext.getBean(name,type);
     }
 
-    public static String get(String key) {
+    public static String getMessage(String key) {
         Locale locale = getLocaleResolver().resolveLocale(null);
         return applicationContext.getMessage(key,null,locale);
     }
 
 
-    public static String get(String key , Object[] arg) {
+    public static String getMessage(String key , Object[] arg) {
         Locale locale = getLocaleResolver().resolveLocale(null);
         return applicationContext.getMessage(key,arg,locale);
     }

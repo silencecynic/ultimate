@@ -34,25 +34,25 @@ public class Shiro {
         return new ShiroRealm();
     }
 
-    @Bean
-    @SuppressWarnings("unchecked")
-    public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("shiroFilter");
-        filterRegistrationBean.setFilter(delegatingFilterProxy);
-        filterRegistrationBean.addInitParameter("targetFilterLifecycle","true");
-        filterRegistrationBean.setEnabled(true);
-        filterRegistrationBean.addUrlPatterns("/*");
-        return filterRegistrationBean;
-    }
+//    @Bean
+//    @SuppressWarnings("unchecked")
+//    public FilterRegistrationBean filterRegistrationBean() {
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("shiroFilter");
+//        filterRegistrationBean.setFilter(delegatingFilterProxy);
+//        filterRegistrationBean.addInitParameter("targetFilterLifecycle","true");
+//        filterRegistrationBean.setEnabled(true);
+//        filterRegistrationBean.addUrlPatterns("/*");
+//        return filterRegistrationBean;
+//    }
 
     @Bean
     public ShiroFilterChainDefinition filterChainDefinition() {
         DefaultShiroFilterChainDefinition filterChainDefinition = new DefaultShiroFilterChainDefinition();
-        filterChainDefinition.addPathDefinition("/root/**", "authc,roles[root]");
-        filterChainDefinition.addPathDefinition("/api/v1**","authc");
-        filterChainDefinition.addPathDefinition("/public/**","anon");
-        filterChainDefinition.addPathDefinition("/**", "authc");
+//        filterChainDefinition.addPathDefinition("/root/**", "authc,roles[root]");
+//        filterChainDefinition.addPathDefinition("/api/v1**","authc");
+//        filterChainDefinition.addPathDefinition("/public/**","anon");
+//        filterChainDefinition.addPathDefinition("/**", "authc");
         return filterChainDefinition;
     }
 

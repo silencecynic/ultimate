@@ -10,5 +10,4 @@ public interface Converter {
 
     Map<String,Object> XMLConverterMap(String XML);
 
-
 }

@@ -14,7 +14,7 @@
   </resultMap>
 
   <insert id="insert" parameterType="com.api.boot.modules.domain.AuthcUser">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into authc_user (id, user_name,
@@ -26,7 +26,7 @@
   </insert>
 
   <insert id="insertSelective" parameterType="com.api.boot.modules.domain.AuthcUser">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into authc_user

@@ -12,7 +12,7 @@
   </resultMap>
 
   <insert id="insert" parameterType="com.api.boot.modules.domain.AuthcRole">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into authc_role (
@@ -29,7 +29,7 @@
   </insert>
 
   <insert id="insertSelective" parameterType="com.api.boot.modules.domain.AuthcRole">
-    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into authc_role

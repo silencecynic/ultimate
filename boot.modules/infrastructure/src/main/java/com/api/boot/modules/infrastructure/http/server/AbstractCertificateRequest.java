@@ -1,15 +1,10 @@
 package com.api.boot.modules.infrastructure.http.server;
 
-
-
-
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.*;
 import java.security.cert.CertificateException;
