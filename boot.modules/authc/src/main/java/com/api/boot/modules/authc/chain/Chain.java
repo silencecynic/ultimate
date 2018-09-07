@@ -8,5 +8,4 @@ public interface Chain {
 
     void load(Map<String,Object> chain);
 
-
 }

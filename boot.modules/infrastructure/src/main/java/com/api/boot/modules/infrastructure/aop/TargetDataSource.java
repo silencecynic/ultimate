@@ -11,7 +11,4 @@ public @interface TargetDataSource {
 
     DataType target() default DataType.master;
 
-    boolean write() default false;
-
-
 }

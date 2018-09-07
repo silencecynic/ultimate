@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
 @RequestMapping (value = "/api/v1")
 @RestController
 public class Handler {
@@ -26,7 +25,6 @@ public class Handler {
     public Handler (HandlerService handlerService , RedisTemplate<String,Object> redis) {
         this.handlerService = handlerService;
         this.redis = redis;
-
     }
 
     @PostMapping (value = "/authc/role/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -36,6 +34,5 @@ public class Handler {
         System.out.println(redis.opsForValue().get("vim"));
         return handlerService.authc(authcRole);
     }
-
 
 }
