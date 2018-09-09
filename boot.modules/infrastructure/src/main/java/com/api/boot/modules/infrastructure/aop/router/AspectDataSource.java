@@ -1,5 +1,6 @@
-package com.api.boot.modules.infrastructure.aop;
+package com.api.boot.modules.infrastructure.aop.router;
 
+import com.api.boot.modules.infrastructure.aop.annotation.TargetDataSource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 @Aspect
-@Order(1)
+@Order(-1)
 @Component
 public class AspectDataSource {
 
@@ -41,7 +42,7 @@ public class AspectDataSource {
     }
 
     @After("pointcut()")
-    public void after(JoinPoint joinPoint) {
+    public void after() {
         DataSourceHolder.removeRoutingData();
     }
 }

@@ -3,8 +3,11 @@ package com.api.boot.modules.infrastructure.constant;
 public enum  XML {
 
     PREFIX_XML("<xml>"),
+
     SUFFIX_XML("</xml>"),
+
     PREFIX_CDATA("<![CDATA["),
+
     SUFFIX_CDATA("]]>");
 
     private String xml;

@@ -1,18 +1,18 @@
-package com.api.boot.modules.infrastructure.aop;
+package com.api.boot.modules.infrastructure.aop.router;
 
 public class DataSourceHolder {
 
     private final static ThreadLocal<DataType> DATA_THREAD_LOCAL = new ThreadLocal<>();
 
-    public static void setRoutingData(DataType type) {
+    protected static void setRoutingData(DataType type) {
         DATA_THREAD_LOCAL.set(type);
     }
 
-    public static DataType getRoutingData() {
+    protected static DataType getRoutingData() {
         return DATA_THREAD_LOCAL.get();
     }
 
-    public static void removeRoutingData() {
+    protected static void removeRoutingData() {
         DATA_THREAD_LOCAL.remove();
     }
 

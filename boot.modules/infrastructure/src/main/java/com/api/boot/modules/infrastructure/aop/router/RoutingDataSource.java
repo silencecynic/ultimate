@@ -1,4 +1,4 @@
-package com.api.boot.modules.infrastructure.aop;
+package com.api.boot.modules.infrastructure.aop.router;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

@@ -95,4 +95,5 @@ mybatis:
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 logging:
   level: debug
-  file: sys_log
+  file: sys_log.log
+  path: ../logger

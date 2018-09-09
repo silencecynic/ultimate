@@ -1,4 +1,6 @@
-package com.api.boot.modules.infrastructure.aop;
+package com.api.boot.modules.infrastructure.aop.annotation;
+
+import com.api.boot.modules.infrastructure.aop.router.DataType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
