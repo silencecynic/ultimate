@@ -1,6 +1,8 @@
 package com.api.boot.modules.configuration;
 
+import com.api.boot.modules.infrastructure.aop.router.DataType;
 import com.api.boot.modules.infrastructure.aop.router.RoutingDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -38,21 +40,21 @@ public class RoutingData {
     @Primary
     @ConfigurationProperties (prefix = "spring.master.datasource")
     public DataSource master() {
-        return masterDataSourceProperties().initializeDataSourceBuilder().build();
+        return masterDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
     @Bean (name = "slaveDataSource")
     @ConfigurationProperties (prefix = "spring.slave.datasource")
     public DataSource slave(){
-       return slaveDataSourceProperties().initializeDataSourceBuilder().build();
+       return slaveDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
     @Bean (name = "routeDataSource")
     public DataSource routeDataSource() {
       Map<Object,Object> targetDataSource = new HashMap<>();
       RoutingDataSource routingData = new RoutingDataSource();
-      targetDataSource.put("master",master());
-      targetDataSource.put("slave",slave());
+      targetDataSource.put(DataType.master,master());
+      targetDataSource.put(DataType.slave,slave());
       routingData.setTargetDataSources(targetDataSource);
       return routingData;
     }

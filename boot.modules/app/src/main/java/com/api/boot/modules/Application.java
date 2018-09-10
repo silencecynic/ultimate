@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableCaching
 @EnableSwagger2
-@EnableAspectJAutoProxy (proxyTargetClass = true)
+@EnableAspectJAutoProxy (proxyTargetClass = true , exposeProxy = true)
 @EnableTransactionManagement (proxyTargetClass = true)
 @MapperScan (basePackages = {"com.api.boot.modules.repository"})
 @SpringBootApplication (scanBasePackages = {"com.api.boot.modules"} ,exclude = {DataSourceAutoConfiguration.class})

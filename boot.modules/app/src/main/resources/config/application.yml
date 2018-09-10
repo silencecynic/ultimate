@@ -7,9 +7,6 @@ spring:
       force-response: true
     converters:
       preferred-json-mapper: jackson
-  aop:
-    proxy-target-class: true
-    auto: true
   redis:
     host: localhost
     port: 6379
@@ -74,6 +71,11 @@ spring:
       password: mysql#root
       url: jdbc:mysql://:3306/awesome?characterEncoding=UTF8&serverTimezone=GMT&useUnicode=true&autoReconnect=true&useSSL=false
       type: com.zaxxer.hikari.HikariDataSource
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: kafka
+      auto-offset-reset: earliest
 server:
   http2:
     enabled: true
