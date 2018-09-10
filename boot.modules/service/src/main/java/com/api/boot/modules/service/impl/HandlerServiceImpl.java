@@ -1,8 +1,8 @@
 package com.api.boot.modules.service.impl;
 
 import com.api.boot.modules.domain.AuthcRole;
-import com.api.boot.modules.infrastructure.aop.router.DataType;
 import com.api.boot.modules.infrastructure.aop.annotation.TargetDataSource;
+import com.api.boot.modules.infrastructure.aop.router.DataType;
 import com.api.boot.modules.infrastructure.http.HttpModel;
 import com.api.boot.modules.repository.AuthcRoleMapper;
 import com.api.boot.modules.service.HandlerService;
@@ -26,6 +26,7 @@ public class HandlerServiceImpl implements HandlerService {
 
 
     @Override
+    @Transactional(readOnly = false)
     @TargetDataSource (target = DataType.master)
     public HttpModel authc(AuthcRole model) {
         HttpModel httpModel = HttpModel.instance();

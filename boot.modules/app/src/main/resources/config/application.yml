@@ -60,7 +60,7 @@ spring:
       sql-script-encoding: UTF-8
       username: mysql
       password: mysql#root
-      url: jdbc:mysql://:3306/mydb?characterEncoding=UTF8&serverTimezone=GMT&useUnicode=true&autoReconnect=true&useSSL=false
+      url: jdbc:mysql://::3306/mydb?characterEncoding=UTF8&serverTimezone=GMT&useUnicode=true&autoReconnect=true&useSSL=false
       type: com.zaxxer.hikari.HikariDataSource
   slave:
     datasource:

@@ -30,8 +30,8 @@ public class Handler {
     @PostMapping (value = "/authc/role/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public HttpModel authcRole(@PathVariable(value = "id") String id) {
         AuthcRole authcRole = new AuthcRole();
-        redis.opsForValue().set("vim","牧神记");
-        System.out.println(redis.opsForValue().get("vim"));
+//        redis.opsForValue().set("vim","牧神记");
+//        System.out.println(redis.opsForValue().get("vim"));
         return handlerService.authc(authcRole);
     }
 
