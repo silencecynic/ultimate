@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -49,7 +50,7 @@ public class RoutingData {
        return slaveDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 
-    @Bean (name = "routeDataSource")
+    @Bean
     public DataSource routeDataSource() {
       Map<Object,Object> targetDataSource = new HashMap<>();
       RoutingDataSource routingData = new RoutingDataSource();
@@ -60,17 +61,10 @@ public class RoutingData {
     }
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory () throws Exception  {
-      SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-      sqlSessionFactoryBean.setDataSource(routeDataSource());
-      sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/com/api/boot/modules/mapper/*.xml"));
-      return sqlSessionFactoryBean.getObject();
-    }
-
-
-    @Bean
-    public SqlSessionTemplate sqlSessionTemplate() throws Exception {
-      return new SqlSessionTemplate(sqlSessionFactory());
+    public SqlSessionFactoryBean sqlSessionFactoryBean () {
+       SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+       sqlSessionFactory.setDataSource(routeDataSource());
+       return sqlSessionFactory;
     }
 
 

@@ -32,12 +32,10 @@ public class Context {
         return bundleMessageSource;
     }
 
-
     @Bean
     public FormattingConversionServiceFactoryBean conversionServiceFactoryBean() {
         return new FormattingConversionServiceFactoryBean();
     }
-
 
     @Bean
     public ValidatorFactory validatorFactory(MessageSource messageSource) {

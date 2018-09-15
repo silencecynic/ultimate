@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 @Component
 public class AspectDataSource {
 
-    @Pointcut("execution(* com.api.boot.modules.*.*(..))")
+    @Pointcut("execution(* com.api.boot.modules.service*.*(..))")
     public void pointcut() { }
 
     @Before("pointcut()")
@@ -30,7 +30,7 @@ public class AspectDataSource {
             Method methodAnnotation = targetPoint[0].getMethod(method,param);
             if (methodAnnotation != null && methodAnnotation.isAnnotationPresent(TargetDataSource.class)) {
                 TargetDataSource targetDataSource = methodAnnotation.getAnnotation(TargetDataSource.class);
-                DataSourceHolder.setRoutingData(targetDataSource.target());
+                DataSourceContextHolder.setRoutingData(targetDataSource.target());
             }
         } catch (NoSuchMethodException ex) {
             ex.printStackTrace();
@@ -39,6 +39,6 @@ public class AspectDataSource {
 
     @After("pointcut()")
     public void after() {
-        DataSourceHolder.removeRoutingData();
+        DataSourceContextHolder.removeRoutingData();
     }
 }

@@ -26,7 +26,6 @@ public class Quartz {
         return jobFactory;
     }
 
-
     @Bean
     public JobDetailFactoryBean jobDetailFactoryBean() {
         JobDetailFactoryBean jobDetailFactoryBean = new JobDetailFactoryBean();
@@ -36,13 +35,12 @@ public class Quartz {
         return jobDetailFactoryBean;
     }
 
-
     @Bean
     @Qualifier
     public SchedulerFactoryBean schedulerFactoryBean(JobDetail job,final ApplicationContext applicationContext) {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setSchedulerName("quartz scheduler");
-        schedulerFactoryBean.setStartupDelay(10);
+        schedulerFactoryBean.setStartupDelay(0);
         schedulerFactoryBean.setApplicationContextSchedulerContextKey("applicationContextSchedulerContextKey");
         schedulerFactoryBean.setOverwriteExistingJobs(true);
         schedulerFactoryBean.setAutoStartup(true);
@@ -50,8 +48,6 @@ public class Quartz {
         schedulerFactoryBean.setJobDetails(job);
         return schedulerFactoryBean;
     }
-
-
 
     @Bean (name = "cronTrigger")
     public CronTriggerFactoryBean cronTriggerFactoryBean(JobDetail jobDetail) {
@@ -61,7 +57,6 @@ public class Quartz {
         stFactory.setCronExpression("* * * ? * *");
         return stFactory;
     }
-
 
     @Bean (name = "simpleTrigger")
     public SimpleTriggerFactoryBean simpleTriggerFactoryBean(JobDetail jobDetail) {
@@ -74,18 +69,15 @@ public class Quartz {
         return factoryBean;
     }
 
-
     @Bean
     public QuartzInitializerListener quartzInitializerListener() {
         return new QuartzInitializerListener();
     }
 
-
     @Bean
     public Scheduler scheduler(JobDetail job,final ApplicationContext applicationContext) {
         return schedulerFactoryBean(job, applicationContext).getScheduler();
     }
-
 
     private static final class AutoSpringBeanJobFactory extends SpringBeanJobFactory implements ApplicationContextAware {
         private transient AutowireCapableBeanFactory capableBeanFactory;
@@ -102,5 +94,4 @@ public class Quartz {
             return jobInstance;
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package com.api.boot.modules.infrastructure.http;
 
+import com.sun.istack.internal.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.LocaleResolver;
 import java.util.Locale;
 
 @Component (value = "httpMessagesResolve")
-@Lazy(value = false)
+@Lazy
 public class MessagesResolve implements ApplicationContextAware, DisposableBean {
 
     private static ApplicationContext applicationContext;
@@ -24,7 +25,7 @@ public class MessagesResolve implements ApplicationContextAware, DisposableBean 
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(ApplicationContext  applicationContext) throws BeansException {
 
         MessagesResolve.applicationContext = applicationContext;
 

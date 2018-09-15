@@ -10,15 +10,12 @@ import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 @Configuration
 public class Shiro {
-
 
     @Bean
     public DefaultWebSecurityManager securityManager() {
@@ -26,7 +23,6 @@ public class Shiro {
         securityManager.setRealm(realm());
         return securityManager;
     }
-
 
     @Bean(name = "realm")
     @DependsOn("lifecycleBeanPostProcessor")
@@ -55,7 +51,6 @@ public class Shiro {
 //        filterChainDefinition.addPathDefinition("/**", "authc");
         return filterChainDefinition;
     }
-
 
     @Bean (name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {

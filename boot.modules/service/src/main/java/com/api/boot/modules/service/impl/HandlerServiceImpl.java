@@ -24,10 +24,9 @@ public class HandlerServiceImpl implements HandlerService {
         this.authcRoleMapper = authcRoleMapper;
     }
 
-
     @Override
-    @Transactional(readOnly = false)
     @TargetDataSource (target = DataType.master)
+    @Transactional(readOnly = false)
     public HttpModel authc(AuthcRole model) {
         HttpModel httpModel = HttpModel.instance();
         model.setId(UUID.randomUUID().toString().trim().replaceAll("[\\-]","").toUpperCase());

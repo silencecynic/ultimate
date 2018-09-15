@@ -34,7 +34,6 @@ public class Redis {
     @Value("${spring.redis.database}")
     private Integer database;
 
-
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
@@ -44,7 +43,6 @@ public class Redis {
         configuration.setDatabase(database);
         return new LettuceConnectionFactory(configuration);
     }
-
 
     @Bean
     @SuppressWarnings("unchecked")
