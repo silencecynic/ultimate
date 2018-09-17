@@ -3,17 +3,13 @@ package com.api.boot.modules.configuration;
 import com.api.boot.modules.infrastructure.aop.router.DataType;
 import com.api.boot.modules.infrastructure.aop.router.RoutingDataSource;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -23,16 +19,14 @@ import java.util.Map;
 @Configuration
 public class RoutingData {
 
-
     @Bean
-    @Primary
-    @ConfigurationProperties(value = "spring.master.datasource")
+    @ConfigurationProperties (prefix = "spring.master.datasource")
     public DataSourceProperties masterDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
-    @ConfigurationProperties (value = "spring.slave.datasource")
+    @ConfigurationProperties (prefix = "spring.slave.datasource")
     public DataSourceProperties slaveDataSourceProperties() {
         return new DataSourceProperties();
     }
@@ -66,7 +60,6 @@ public class RoutingData {
        sqlSessionFactory.setDataSource(routeDataSource());
        return sqlSessionFactory;
     }
-
 
     @Bean
     public PlatformTransactionManager transactionManager() {
