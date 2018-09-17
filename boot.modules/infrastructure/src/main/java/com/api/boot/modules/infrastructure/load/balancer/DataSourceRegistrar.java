@@ -1,5 +1,4 @@
-package com.api.boot.modules.infrastructure.aop.router;
-
+package com.api.boot.modules.infrastructure.load.balancer;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.shiro.util.StringUtils;
@@ -17,17 +16,12 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
-
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * <link>https://www.cnblogs.com/badtheway/p/9061065.html</link>
- */
-public abstract class AbstractRoute implements Route , ImportBeanDefinitionRegistrar, EnvironmentAware {
-
+public class DataSourceRegistrar implements ImportBeanDefinitionRegistrar , EnvironmentAware {
   private final static ConfigurationPropertyNameAliases alias = new ConfigurationPropertyNameAliases();
 
   private Environment env;

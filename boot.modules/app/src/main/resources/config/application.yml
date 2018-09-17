@@ -82,7 +82,7 @@ spring:
 server:
   http2:
     enabled: true
-  port: 7070
+  port: 7080
   undertow:
     accesslog:
       enabled: true

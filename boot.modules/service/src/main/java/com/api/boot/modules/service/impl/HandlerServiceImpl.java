@@ -1,9 +1,9 @@
 package com.api.boot.modules.service.impl;
 
 import com.api.boot.modules.domain.AuthcRole;
-import com.api.boot.modules.infrastructure.aop.annotation.TargetDataSource;
-import com.api.boot.modules.infrastructure.aop.router.DataType;
 import com.api.boot.modules.infrastructure.http.HttpModel;
+import com.api.boot.modules.infrastructure.load.balancer.TargetType;
+import com.api.boot.modules.infrastructure.load.balancer.annotation.TargetData;
 import com.api.boot.modules.repository.AuthcRoleMapper;
 import com.api.boot.modules.service.HandlerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class HandlerServiceImpl implements HandlerService {
     }
 
     @Override
-    @TargetDataSource (target = DataType.master)
+    @TargetData(target = TargetType.master)
     @Transactional(readOnly = false)
     public HttpModel authc(AuthcRole model) {
         HttpModel httpModel = HttpModel.instance();

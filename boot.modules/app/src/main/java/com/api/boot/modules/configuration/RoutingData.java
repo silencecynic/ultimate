@@ -1,7 +1,8 @@
 package com.api.boot.modules.configuration;
 
-import com.api.boot.modules.infrastructure.aop.router.DataType;
-import com.api.boot.modules.infrastructure.aop.router.RoutingDataSource;
+
+import com.api.boot.modules.infrastructure.load.balancer.RoutingDataSource;
+import com.api.boot.modules.infrastructure.load.balancer.TargetType;
 import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -45,24 +46,25 @@ public class RoutingData {
     }
 
     @Bean
-    public DataSource routeDataSource() {
-      Map<Object,Object> targetDataSource = new HashMap<>();
-      RoutingDataSource routingData = new RoutingDataSource();
-      targetDataSource.put(DataType.master,master());
-      targetDataSource.put(DataType.slave,slave());
-      routingData.setTargetDataSources(targetDataSource);
-      return routingData;
+    public DataSource routingDataSource() {
+      Map<Object,Object> multiple = new HashMap<>();
+      multiple.put(TargetType.master,master());
+      multiple.put(TargetType.slave,slave());
+      RoutingDataSource routingDataSource = new RoutingDataSource();
+      routingDataSource.setTargetDataSources(multiple);
+      routingDataSource.setDefaultTargetDataSource(master());
+      return routingDataSource;
     }
 
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean () {
        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-       sqlSessionFactory.setDataSource(routeDataSource());
+       sqlSessionFactory.setDataSource(routingDataSource());
        return sqlSessionFactory;
     }
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-      return new DataSourceTransactionManager(routeDataSource());
+      return new DataSourceTransactionManager(routingDataSource());
     }
 }
