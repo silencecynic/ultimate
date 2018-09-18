@@ -1,6 +1,8 @@
 package com.api.boot.modules.infrastructure.http.server;
 
-import org.apache.hc.core5.ssl.SSLContextBuilder;
+
+
+import org.apache.http.ssl.SSLContextBuilder;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;

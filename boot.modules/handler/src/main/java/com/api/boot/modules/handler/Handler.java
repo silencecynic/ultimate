@@ -5,6 +5,7 @@ import com.api.boot.modules.infrastructure.http.HttpModel;
 import com.api.boot.modules.service.HandlerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -23,11 +24,14 @@ public class Handler {
 
     private KafkaTemplate<String,Object> kafka;
 
+    private ElasticsearchOperations elasticsearchOperations;
+
     @Autowired
-    public Handler (HandlerService handlerService , RedisTemplate<String,Object> redis, KafkaTemplate<String,Object> kafka) {
+    public Handler (HandlerService handlerService , RedisTemplate<String,Object> redis, KafkaTemplate<String,Object> kafka, ElasticsearchOperations elasticsearchOperations) {
         this.handlerService = handlerService;
         this.redis = redis;
         this.kafka = kafka;
+        this.elasticsearchOperations = elasticsearchOperations;
     }
 
     @PostMapping (value = "/authc/role/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
