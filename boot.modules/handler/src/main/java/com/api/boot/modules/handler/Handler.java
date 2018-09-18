@@ -1,11 +1,10 @@
 package com.api.boot.modules.handler;
 
 import com.api.boot.modules.domain.AuthcRole;
-import com.api.boot.modules.infrastructure.http.HttpModel;
 import com.api.boot.modules.service.HandlerService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -35,11 +34,13 @@ public class Handler {
     }
 
     @PostMapping (value = "/authc/role/{id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public HttpModel authcRole(@PathVariable(value = "id") String id) {
+    @Cacheable (cacheNames = "hello" ,key ="#id")
+    public String authcRole(@PathVariable(value = "id") String id) {
         AuthcRole authcRole = new AuthcRole();
 //        redis.opsForValue().set("vim","牧神记");
 //        System.out.println(redis.opsForValue().get("vim"));
-        return handlerService.authc(authcRole);
+//        System.out.print(redis.opsForValue().get("id"));
+        return "hello";
     }
 
 }
