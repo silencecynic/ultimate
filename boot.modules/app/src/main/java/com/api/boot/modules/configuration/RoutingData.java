@@ -10,10 +10,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,7 @@ public class RoutingData {
 
     @Bean
     @ConfigurationProperties (prefix = "spring.master.datasource")
+    @Primary
     public DataSourceProperties masterDataSourceProperties() {
         return new DataSourceProperties();
     }
@@ -46,20 +49,21 @@ public class RoutingData {
     }
 
     @Bean
+    @Primary
     public DataSource routingDataSource() {
       Map<Object,Object> multiple = new HashMap<>();
       multiple.put(TargetType.master,master());
       multiple.put(TargetType.slave,slave());
       RoutingDataSource routingDataSource = new RoutingDataSource();
       routingDataSource.setTargetDataSources(multiple);
-      routingDataSource.setDefaultTargetDataSource(master());
       return routingDataSource;
     }
 
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactoryBean () {
+    public SqlSessionFactoryBean sqlSessionFactoryBean () throws IOException {
        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
        sqlSessionFactory.setDataSource(routingDataSource());
+       sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/api/boot/modules/mapper/*.xml"));
        return sqlSessionFactory;
     }
 

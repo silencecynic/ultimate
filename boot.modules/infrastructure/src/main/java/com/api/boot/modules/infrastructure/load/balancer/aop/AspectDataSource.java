@@ -21,21 +21,18 @@ public class AspectDataSource {
   @Pointcut("execution(* com.api.boot.modules.*.*(..))")
   public void pointcut() { }
 
-  @Before("@annotation(com.api.boot.modules.infrastructure.load.balancer.annotation.TargetData)")
-  public void before(JoinPoint joinPoint) {
+  @Pointcut ("execution(* com.api.boot.modules.*.*(..))")
+  @Before ("@annotation(com.api.boot.modules.infrastructure.load.balancer.annotation.TargetData)")
+  public void before(JoinPoint joinPoint) throws NoSuchMethodException {
     Object target = joinPoint.getTarget();
     String method = joinPoint.getSignature().getName();
     Class<?>[] targetPoint = target.getClass().getInterfaces();
     Class<?>[] param = ((MethodSignature) joinPoint.getSignature()).getMethod().getParameterTypes();
-    try{
-      Method methodAnnotation = targetPoint[0].getMethod(method,param);
+    Method methodAnnotation = targetPoint[0].getMethod(method,param);
       if (methodAnnotation != null && methodAnnotation.isAnnotationPresent(TargetData.class)) {
         TargetData targetData = methodAnnotation.getAnnotation(TargetData.class);
         DataSourceHolder.set(targetData.target());
       }
-    } catch (NoSuchMethodException ex) {
-      ex.printStackTrace();
-    }
   }
 
   @After("@annotation(com.api.boot.modules.infrastructure.load.balancer.annotation.TargetData)")
