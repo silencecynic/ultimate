@@ -20,6 +20,7 @@
 		<module>authc</module>
 		<module>flowable</module>
 		<module>elasticsearch</module>
+		<module>stream</module>
 	</modules>
 
 	<properties>
