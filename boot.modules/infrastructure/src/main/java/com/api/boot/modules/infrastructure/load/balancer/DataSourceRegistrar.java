@@ -1,7 +1,6 @@
 package com.api.boot.modules.infrastructure.load.balancer;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.shiro.util.StringUtils;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -15,6 +14,7 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
