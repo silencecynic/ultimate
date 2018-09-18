@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindException;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -40,8 +38,6 @@ public class ExceptionIntercept {
                 .setStatus(HttpServletResponse.SC_BAD_REQUEST)
                 .build();
     }
-
-
 
     @ExceptionHandler (Exception.class)
     public HttpModel system(Exception exception) {

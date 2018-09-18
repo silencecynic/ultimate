@@ -31,7 +31,6 @@ public abstract class AbstractConverter implements Converter {
         return map;
     }
 
-
     @Override
     public String MapConverterXML(Map<String, Object> map) {
         StringBuilder builder = new StringBuilder(XML.PREFIX_XML.toString());
@@ -46,7 +45,6 @@ public abstract class AbstractConverter implements Converter {
         }
         return builder.append(XML.SUFFIX_XML).toString().trim();
     }
-
 
     @Override
     public String MapConverterXML(Map<String, Object> map, Boolean bool) {

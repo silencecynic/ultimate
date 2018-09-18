@@ -15,5 +15,4 @@ public interface Certificate {
 
     SSLContext load() throws  IOException,KeyStoreException,KeyManagementException, UnrecoverableKeyException,NoSuchAlgorithmException;
 
-
 }

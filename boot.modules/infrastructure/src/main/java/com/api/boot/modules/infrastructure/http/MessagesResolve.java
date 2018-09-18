@@ -1,6 +1,5 @@
 package com.api.boot.modules.infrastructure.http;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
@@ -26,9 +25,7 @@ public class MessagesResolve implements ApplicationContextAware, DisposableBean 
 
     @Override
     public void setApplicationContext(ApplicationContext  applicationContext) throws BeansException {
-
         MessagesResolve.applicationContext = applicationContext;
-
     }
 
     @Override
