@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 /**
  * <link>https://www.mkyong.com/spring-boot/spring-boot-spring-data-elasticsearch-example/</link>
  */
-@Configuration
+@Configuration (value = "search")
 @EnableElasticsearchRepositories (basePackages = {"com.api.boot.modules.repository.elasticsearch"})
 public class Elasticsearch {
 
