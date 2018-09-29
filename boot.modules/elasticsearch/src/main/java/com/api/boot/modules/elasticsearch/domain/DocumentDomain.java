@@ -1,8 +1,6 @@
 package com.api.boot.modules.elasticsearch.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
 
 import java.io.Serializable;
 
@@ -19,13 +17,9 @@ public class DocumentDomain implements Serializable {
     this.title = title;
   }
 
-
-
   private String id;
 
-
   private String name;
-
 
   private String title;
 
